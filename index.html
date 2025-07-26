@@ -10,37 +10,27 @@
       font-family: 'Segoe UI', Arial, sans-serif;
       color: #253857;
       margin: 0;
-      padding: 0 0 48px 0;
+      padding-bottom: 42px;
     }
     .logos-ucv {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       padding: 10px 24px 0 24px;
-      background: transparent;
-      z-index: 10;
-      position: relative;
-    }
-    .logos-ucv img {
-      display: block;
     }
     .logo-facmed {
       width: 77px;
-      height: auto;
       border-radius: 100px;
       box-shadow: 0 2px 6px #3332;
       background: #ffe259;
       padding: 3px;
-      margin-right: 10px;
     }
     .logo-ceebio {
       width: 116px;
-      height: auto;
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 2px 6px #3332;
       padding: 2px 6px;
-      margin-left: 10px;
     }
     @media (max-width:800px){
       .logos-ucv {padding: 7px 6px 0 6px;}
@@ -51,10 +41,8 @@
       text-align: center;
       background: linear-gradient(90deg, #2266b1 60%, #ffe259 120%);
       padding: 38px 12px 16px 12px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       border-bottom: 1px solid #d6e3f7;
-      position: relative;
-      z-index: 1;
     }
     header h1 {
       color: #ffe259;
@@ -64,19 +52,22 @@
       margin: 0 0 10px 0;
       text-shadow: 0 2px 7px #1f3964;
     }
-    .container {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      overflow-x: auto;
-      padding: 12px;
-      z-index: 0;
+    /* --- Nueva disposición: 2 filas, 5 columnas --- */
+    .malla-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 22px 18px;
+      justify-items: stretch;
+      align-items: stretch;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 12px 12px 0 12px;
     }
     .semestre {
       background: #fffbea;
       border-radius: 10px;
-      min-width: 240px;
-      max-width: 255px;
+      min-width: 175px;
       border: 2px solid #2266b1;
       margin-bottom: 8px;
       box-shadow: 0 2px 10px rgba(34,102,177,0.06);
@@ -90,7 +81,7 @@
       border-radius:10px 10px 0 0;
       margin: 0;
       padding: 10px 0 8px 0;
-      font-size: 1.18rem;
+      font-size: 1.13rem;
       text-align: center;
       letter-spacing: .5px;
       font-weight: bold;
@@ -98,7 +89,7 @@
     }
     ul.materias {
       list-style: none;
-      padding: 15px 6px 12px 13px;
+      padding: 14px 7px 12px 13px;
       margin: 0;
       flex-grow: 1;
       display: flex;
@@ -147,7 +138,6 @@
       opacity: 0.6;
       position: relative;
       pointer-events: all;
-      /* para permitir tooltip */
     }
     .materia .check {
       position: absolute;
@@ -175,10 +165,7 @@
       color: #fff; 
     }
     .materia:not(.bloqueada):hover { background: #e3e7fb;}
-    /* tooltip */
-    .materia[title] {
-      position:relative;
-    }
+    .materia[title] {position:relative;}
     .materia.bloqueada:hover::after {
       content: attr(data-tooltip);
       position: absolute;
@@ -200,29 +187,45 @@
       text-align: center;
     }
     .leyenda {
-      max-width: 760px;
-      margin: 38px auto 0 auto;
+      max-width: 820px;
+      margin: 40px auto 0 auto;
       background: #fffde0;
       border: 1.5px solid #ffe259;
       border-radius: 8px;
-      padding: 16px 23px;
+      padding: 19px 25px;
       color: #343a40;
-      font-size: 1.022em;
-      line-height: 1.62;
+      font-size: 1.08em;
+      line-height: 1.64;
       box-shadow: 0 4px 16px #ffea0040;
       letter-spacing: 0.001em;
+      font-weight: 400;
     }
-    @media (max-width:840px) {
-      .container {
-        flex-wrap: nowrap;
-        gap: 10px;
-        padding: 3px; 
+    .leyenda b.ir {
+      color: #135698;
+      letter-spacing: .5px;
+      font-size: 1.07em;
+      text-shadow: 0 1px 9px #dde0e622;
+      font-weight: 700;
+    }
+    @media (max-width:1200px) {
+      .malla-grid {max-width: 98vw;}
+      .semestre {min-width:125px; font-size: .93em;}
+    }
+    @media (max-width:920px){
+      .malla-grid {gap:12px 4px;}
+      .leyenda {font-size: .96em;}
+    }
+    @media (max-width:700px){
+      .malla-grid {
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(5, auto);
+        gap:9px 4vw;
       }
-      .semestre {
-        min-width:180px;
-        max-width:94vw;
-        font-size:.97em;
-      }
+      .semestre {min-width:110px; font-size:.92em;}
+    }
+    @media (max-width:520px){
+      header h1{font-size:1.215rem;}
+      .leyenda{padding:8px 4vw;}
     }
   </style>
 </head>
@@ -232,14 +235,16 @@
     <img src="logo-ceebio.jpg" alt="Logo CEEBIO" class="logo-ceebio">
   </div>
   <header>
-    <h1>Malla Curricular - Licenciatura en Bioanálisis<br><span style="font-size:1.09em;">Universidad Central de Venezuela</span></h1>
+    <h1>Malla Curricular - Licenciatura en Bioanálisis<br>
+      <span style="font-size:1.09em;">Universidad Central de Venezuela</span>
+    </h1>
   </header>
-  <div class="container" id="malla-contenedor"></div>
+  <div class="malla-grid" id="malla-contenedor"></div>
   <div class="leyenda">
     <strong>Información adicional:</strong><br>
     • Para cursar <b>Deontología y Legislación</b>, deben tenerse aprobados 45 créditos.<br>
     • Para cursar <b>Administración Sanitaria</b>, deben aprobarse 40 créditos obligatorios.<br>
-    • Para cursar el <b>internado rotatorio</b>, deben aprobarse 18 unidades de crédito de materias electivas, y haberse realizado el servicio comunitario. (Esta información es sólo a modo de referencia, no se muestra con botón de aprobación).
+    • Para cursar el <b class="ir">Internado Rotatorio</b>, deben aprobarse 18 unidades de crédito de materias electivas, y haberse realizado el servicio comunitario.
   </div>
 <script>
 const malla = [
@@ -355,70 +360,80 @@ function etiquetaMat(codigo) {
 
 function renderMalla() {
   const aprobadas = getAprobadas();
-  const mallaCont = document.getElementById('malla-contenedor');
-  mallaCont.innerHTML = "";
+  const contenedor = document.getElementById('malla-contenedor');
+  contenedor.innerHTML = "";
 
-  malla.forEach((sem, sid) => {
-    const semDiv = document.createElement("div");
-    semDiv.className = "semestre";
+  // Primera fila: semestres 1-5
+  for (let i=0;i<5;i++) {
+    const semDiv = crearSemestreDiv(malla[i], aprobadas);
+    contenedor.appendChild(semDiv);
+  }
+  // Segunda fila: semestres 6-10
+  for (let i=5;i<10;i++) {
+    const semDiv = crearSemestreDiv(malla[i], aprobadas);
+    contenedor.appendChild(semDiv);
+  }
+}
 
-    const titulo = document.createElement("h2");
-    titulo.textContent = sem.nombre;
-    semDiv.appendChild(titulo);
+function crearSemestreDiv(sem, aprobadas) {
+  const semDiv = document.createElement("div");
+  semDiv.className = "semestre";
+  const titulo = document.createElement("h2");
+  titulo.textContent = sem.nombre;
+  semDiv.appendChild(titulo);
 
-    const ul = document.createElement("ul");
-    ul.className = "materias";
+  const ul = document.createElement("ul");
+  ul.className = "materias";
 
-    sem.materias.forEach((mat) => {
-      const estadoReq = checkReqs(mat, aprobadas);
+  sem.materias.forEach((mat) => {
+    const estadoReq = checkReqs(mat, aprobadas);
 
-      const li = document.createElement("li");
-      li.className = "materia";
-      li.setAttribute('tabindex','0');
+    const li = document.createElement("li");
+    li.className = "materia";
+    li.setAttribute('tabindex','0');
 
-      if (!estadoReq.ok) {
-        li.classList.add("bloqueada");
-        let msg = "";
-        if (estadoReq.faltan && estadoReq.faltan.length){
-          msg += "Falta aprobar: \n";
-          msg += estadoReq.faltan.map(etiquetaMat).join(", ");
-        }
-        if (estadoReq.faltanUC!==undefined) {
-          msg += `Faltan ${estadoReq.faltanUC} UC aprobadas`;
-        }
-        if (estadoReq.faltanMat && estadoReq.faltanMat.length) {
-          msg += "Debe aprobar todas las materias del 1° al 8° semestre";
-        }
-        li.dataset.tooltip = msg||"No cumple requisitos";
+    if (!estadoReq.ok) {
+      li.classList.add("bloqueada");
+      let msg = "";
+      if (estadoReq.faltan && estadoReq.faltan.length){
+        msg += "Falta aprobar: \n";
+        msg += estadoReq.faltan.map(etiquetaMat).join(", ");
       }
-      if (aprobadas.includes(mat.codigo)) {
-        li.classList.add("aprobada");
+      if (estadoReq.faltanUC!==undefined) {
+        msg += `Faltan ${estadoReq.faltanUC} UC aprobadas`;
       }
-      li.innerHTML = `
-        <span class="nombre">${mat.nombre}</span>
-        <span class="uc">${mat.uc} UC</span>
-        <span class="check">✔</span>
-      `;
-      if (!aprobadas.includes(mat.codigo) && !li.classList.contains('bloqueada')) {
-        li.addEventListener('click', function(e){
-          aprobadas.push(mat.codigo);
-          setAprobadas(aprobadas);
-          renderMalla();
-        });
+      if (estadoReq.faltanMat && estadoReq.faltanMat.length) {
+        msg += "Debe aprobar todas las materias del 1° al 8° semestre";
       }
-      if (aprobadas.includes(mat.codigo)) {
-        li.addEventListener('click', function(e){
-          const idx = aprobadas.indexOf(mat.codigo);
-          if(idx>-1) aprobadas.splice(idx,1);
-          setAprobadas(aprobadas);
-          renderMalla();
-        });
-      }
-      ul.appendChild(li);
-    });
-    semDiv.appendChild(ul);
-    mallaCont.appendChild(semDiv);
+      li.dataset.tooltip = msg||"No cumple requisitos";
+    }
+    if (aprobadas.includes(mat.codigo)) {
+      li.classList.add("aprobada");
+    }
+    li.innerHTML = `
+      <span class="nombre">${mat.nombre}</span>
+      <span class="uc">${mat.uc} UC</span>
+      <span class="check">✔</span>
+    `;
+    if (!aprobadas.includes(mat.codigo) && !li.classList.contains('bloqueada')) {
+      li.addEventListener('click', function(e){
+        aprobadas.push(mat.codigo);
+        setAprobadas(aprobadas);
+        renderMalla();
+      });
+    }
+    if (aprobadas.includes(mat.codigo)) {
+      li.addEventListener('click', function(e){
+        const idx = aprobadas.indexOf(mat.codigo);
+        if(idx>-1) aprobadas.splice(idx,1);
+        setAprobadas(aprobadas);
+        renderMalla();
+      });
+    }
+    ul.appendChild(li);
   });
+  semDiv.appendChild(ul);
+  return semDiv;
 }
 
 window.addEventListener('DOMContentLoaded', renderMalla);
