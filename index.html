@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Malla Curricular - Bioanálisis UCV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #f4f8fb;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #253857;
+      margin: 0;
+      padding: 0 0 48px 0;
+    }
+    .logos-ucv {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 10px 24px 0 24px;
+      background: transparent;
+      z-index: 10;
+      position: relative;
+    }
+    .logos-ucv img {
+      display: block;
+    }
+    .logo-facmed {
+      width: 77px;
+      height: auto;
+      border-radius: 100px;
+      box-shadow: 0 2px 6px #3332;
+      background: #ffe259;
+      padding: 3px;
+      margin-right: 10px;
+    }
+    .logo-ceebio {
+      width: 116px;
+      height: auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px #3332;
+      padding: 2px 6px;
+      margin-left: 10px;
+    }
+    @media (max-width:800px){
+      .logos-ucv {padding: 7px 6px 0 6px;}
+      .logo-facmed {width: 53px;}
+      .logo-ceebio {width: 77px;}
+    }
+    header {
+      text-align: center;
+      background: linear-gradient(90deg, #2266b1 60%, #ffe259 120%);
+      padding: 38px 12px 16px 12px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #d6e3f7;
+      position: relative;
+      z-index: 1;
+    }
+    header h1 {
+      color: #ffe259;
+      font-weight: bold;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin: 0 0 10px 0;
+      text-shadow: 0 2px 7px #1f3964;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 12px;
+      z-index: 0;
+    }
+    .semestre {
+      background: #fffbea;
+      border-radius: 10px;
+      min-width: 240px;
+      max-width: 255px;
+      border: 2px solid #2266b1;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 10px rgba(34,102,177,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .semestre h2 {
+      background: #2266b1;
+      color: #ffe259;
+      border-radius:10px 10px 0 0;
+      margin: 0;
+      padding: 10px 0 8px 0;
+      font-size: 1.18rem;
+      text-align: center;
+      letter-spacing: .5px;
+      font-weight: bold;
+      box-shadow: 0 1px 0 #ffe25936;
+    }
+    ul.materias {
+      list-style: none;
+      padding: 15px 6px 12px 13px;
+      margin: 0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .materia {
+      background: #f4f8fb;
+      border-radius: 7px;
+      padding: 11px 9px 9px 13px;
+      border: 1.5px solid #b8cbe2;
+      position: relative;
+      cursor: pointer;
+      transition: box-shadow 0.2s, background 0.2s, border 0.2s;
+      user-select: none;
+      min-height: 44px;
+    }
+    .materia:hover { box-shadow: 0px 1px 10px rgba(34,102,177,0.1); }
+    .materia .nombre {
+      font-weight: 500;
+      color: #2266b1;
+      font-size: 1.08em;
+      margin-right: .5em;
+    }
+    .materia .uc {
+      color: #3c4464;
+      font-size: .96em;
+      margin-left: 3px;
+      font-weight: 400;
+      background: #ffe25933;
+      padding: 2.5px 7px;
+      border-radius: 5px;
+    }
+    .materia.aprobada {
+      background: #d0fcf5;
+      border-color: #00cdac;
+      text-decoration: line-through;
+      color: #737e8c;
+      opacity: 0.74;
+    }
+    .materia.bloqueada {
+      background: #edf4fa;
+      border-color: #b8cbe2;
+      color: #b8babd;
+      cursor: not-allowed;
+      opacity: 0.6;
+      position: relative;
+      pointer-events: all;
+      /* para permitir tooltip */
+    }
+    .materia .check {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      background: #2266b1;
+      color: #ffe259;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bolder;
+      font-size: 1em;
+      box-shadow: 0 1px 3px rgba(34,102,177,0.14);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .materia.aprobada .check { 
+      opacity: 1; 
+      background: #00cdac;
+      color: #fff; 
+    }
+    .materia:not(.bloqueada):hover { background: #e3e7fb;}
+    /* tooltip */
+    .materia[title] {
+      position:relative;
+    }
+    .materia.bloqueada:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 50%;
+      top: -42px;
+      transform: translateX(-50%);
+      background: #2266b1;
+      color: #ffe259;
+      white-space: pre-line;
+      font-size: .97em;
+      padding: 8px 13px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #25385726;
+      pointer-events: none;
+      z-index: 90;
+      opacity: 1;
+      min-width: 90px;
+      max-width: 220px;
+      text-align: center;
+    }
+    .leyenda {
+      max-width: 760px;
+      margin: 38px auto 0 auto;
+      background: #fffde0;
+      border: 1.5px solid #ffe259;
+      border-radius: 8px;
+      padding: 16px 23px;
+      color: #343a40;
+      font-size: 1.022em;
+      line-height: 1.62;
+      box-shadow: 0 4px 16px #ffea0040;
+      letter-spacing: 0.001em;
+    }
+    @media (max-width:840px) {
+      .container {
+        flex-wrap: nowrap;
+        gap: 10px;
+        padding: 3px; 
+      }
+      .semestre {
+        min-width:180px;
+        max-width:94vw;
+        font-size:.97em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="logos-ucv">
+    <img src="logo-facmed.png" alt="Logo Facultad de Medicina" class="logo-facmed">
+    <img src="logo-ceebio.jpg" alt="Logo CEEBIO" class="logo-ceebio">
+  </div>
+  <header>
+    <h1>Malla Curricular - Licenciatura en Bioanálisis<br><span style="font-size:1.09em;">Universidad Central de Venezuela</span></h1>
+  </header>
+  <div class="container" id="malla-contenedor"></div>
+  <div class="leyenda">
+    <strong>Información adicional:</strong><br>
+    • Para cursar <b>Deontología y Legislación</b>, deben tenerse aprobados 45 créditos.<br>
+    • Para cursar <b>Administración Sanitaria</b>, deben aprobarse 40 créditos obligatorios.<br>
+    • Para cursar el <b>internado rotatorio</b>, deben aprobarse 18 unidades de crédito de materias electivas, y haberse realizado el servicio comunitario. (Esta información es sólo a modo de referencia, no se muestra con botón de aprobación).
+  </div>
+<script>
+const malla = [
+  { nombre: "PRIMER SEMESTRE", materias: [
+      { nombre: "Matemática I", uc: 3, codigo: "mat1" },
+      { nombre: "Histología", uc: 5, codigo: "histologia" },
+      { nombre: "Bioestadística I", uc: 4, codigo: "bioest1" },
+      { nombre: "Metodología de la Investigación", uc: 1, codigo: "metod" },
+      { nombre: "Principios de Química", uc: 3, codigo: "quimica1" }
+    ] 
+  },
+  { nombre: "SEGUNDO SEMESTRE", materias: [
+      { nombre: "Matemática II", uc: 4, codigo: "mat2", reqs:["mat1"] },
+      { nombre: "Física I", uc: 4, codigo: "fisica1", reqs:["mat1"] },
+      { nombre: "Química Orgánica I", uc: 4, codigo: "quimorg1", reqs:["quimica1"] },
+      { nombre: "Anatomía y Embriología I", uc: 4, codigo: "anat1", reqs:["histologia"] }
+    ]
+  },
+  { nombre: "TERCER SEMESTRE", materias: [
+      { nombre: "Química Analítica", uc: 5, codigo: "quiman", reqs:["quimica1"] },
+      { nombre: "Física II", uc: 4, codigo: "fisica2", reqs:["mat2","fisica1"] },
+      { nombre: "Epidemiología", uc: 3, codigo: "epidemio", reqs:["bioest1"] },
+      { nombre: "Anatomía II", uc: 2, codigo: "anat2", reqs:["anat1"] }
+    ]
+  },
+  { nombre: "CUARTO SEMESTRE", materias: [
+      { nombre: "Fisiología", uc: 5, codigo: "fisio", reqs:["anat1"] },
+      { nombre: "Bioquímica I", uc: 6, codigo: "bioq1", reqs:["histologia","bioest1","fisica2","quimorg1","quiman"] },
+      { nombre: "Sociología", uc: 3, codigo: "socio" }
+    ]
+  },
+  { nombre: "QUINTO SEMESTRE", materias: [
+      { nombre: "Deontología y Legislación", uc: 3, codigo: "deont", reqUC: 45 },
+      { nombre: "Administración Sanitaria", uc: 2, codigo: "adminsan", reqUC: 40 },
+      { nombre: "Bioquímica II", uc: 2, codigo: "bioq2", reqs:["bioq1"] },
+      { nombre: "Inmunología I", uc: 2, codigo: "inmun1", reqs:["bioq1"] },
+      { nombre: "Bacteriología I", uc: 3, codigo: "bact1", reqs:["bioq1"] }
+    ]
+  },
+  { nombre: "SEXTO SEMESTRE", materias: [
+      { nombre: "Micología", uc: 3, codigo: "mico", reqs:["bact1","epidemio","inmun1"] },
+      { nombre: "Laboratorio de Inmunología", uc: 2, codigo: "labinmun", reqs:["bact1","inmun1"] },
+      { nombre: "Bacteriología II", uc: 4, codigo: "bact2", reqs:["bact1","inmun1"] },
+      { nombre: "Bioquímica Clínica I", uc: 5, codigo: "bioqclin1", reqs:["fisio","bioq2"] }
+    ]
+  },
+  { nombre: "SÉPTIMO SEMESTRE", materias: [
+      { nombre: "Hematología I", uc: 5, codigo: "hem1", reqs:["fisio","bioq2","labinmun"] },
+      { nombre: "Virología", uc: 3, codigo: "viro", reqs:["fisio","labinmun"] },
+      { nombre: "Parasitología I", uc: 3, codigo: "paras1", reqs:["labinmun"] },
+      { nombre: "Bacteriología III", uc: 3, codigo: "bact3", reqs:["bact2"] }
+    ]
+  },
+  { nombre: "OCTAVO SEMESTRE", materias: [
+      { nombre: "Toxicología", uc: 5, codigo: "tox", reqs:["bioqclin1","hem1"] },
+      { nombre: "Bioquímica Clínica II", uc:5, codigo: "bioqclin2", reqs:["bioqclin1","hem1"] },
+      { nombre: "Hematología II", uc: 5, codigo: "hem2", reqs:["hem1"] },
+      { nombre: "Parasitología II", uc:3, codigo: "paras2", reqs:["labinmun"] }
+    ]
+  },
+  { nombre: "NOVENO SEMESTRE", materias: [
+      { nombre: "Internado Rotatorio A", uc: 15, codigo: "inta", reqAllPrev: true },
+      { nombre: "Trabajo Especial de Investigación (TEI)", uc: 0, codigo: "teia", reqAllPrev: true }
+    ]
+  },
+  { nombre: "DÉCIMO SEMESTRE", materias: [
+      { nombre: "Internado Rotatorio B", uc: 15, codigo: "intb", reqAllPrev: true },
+      { nombre: "Trabajo Especial de Investigación (TEI)", uc: 0, codigo: "teib", reqAllPrev: true }
+    ]
+  }
+];
+
+const creditoMap = {};
+malla.forEach(sem=>sem.materias.forEach(mat=>{ creditoMap[mat.codigo]=mat.uc }));
+
+function getAprobadas() {
+  let guardado = localStorage.getItem('bioanalisis_ucv_aprobadas_v1');
+  return guardado ? JSON.parse(guardado) : [];
+}
+function setAprobadas(arr) {
+  localStorage.setItem('bioanalisis_ucv_aprobadas_v1', JSON.stringify(arr));
+}
+function totalUC(aprobadas) {
+  return aprobadas.reduce((s,cod)=>s+(creditoMap[cod]||0),0);
+}
+function checkReqs(mat, aprobadas) {
+  if (mat.reqs && mat.reqs.some(req=>!aprobadas.includes(req))) 
+    return {
+      ok:false, 
+      faltan: mat.reqs.filter(req=>!aprobadas.includes(req)) 
+    };
+  if (mat.reqUC && totalUC(aprobadas)<mat.reqUC)
+    return {
+      ok:false,
+      faltanUC: mat.reqUC - totalUC(aprobadas)
+    };
+  if (mat.reqAllPrev) {
+    let prevMat = [];
+    for(let i=0;i<8;i++) malla[i].materias.forEach(m=>prevMat.push(m.codigo));
+    if (!prevMat.every(c=>aprobadas.includes(c)))
+      return { ok:false, faltanMat: prevMat.filter(c=>!aprobadas.includes(c)) }
+  }
+  return { ok:true };
+}
+
+function etiquetaMat(codigo) {
+  for(let sem of malla)
+    for(let mat of sem.materias)
+      if (mat.codigo===codigo) 
+        return mat.nombre;
+  return codigo;
+}
+
+function renderMalla() {
+  const aprobadas = getAprobadas();
+  const mallaCont = document.getElementById('malla-contenedor');
+  mallaCont.innerHTML = "";
+
+  malla.forEach((sem, sid) => {
+    const semDiv = document.createElement("div");
+    semDiv.className = "semestre";
+
+    const titulo = document.createElement("h2");
+    titulo.textContent = sem.nombre;
+    semDiv.appendChild(titulo);
+
+    const ul = document.createElement("ul");
+    ul.className = "materias";
+
+    sem.materias.forEach((mat) => {
+      const estadoReq = checkReqs(mat, aprobadas);
+
+      const li = document.createElement("li");
+      li.className = "materia";
+      li.setAttribute('tabindex','0');
+
+      if (!estadoReq.ok) {
+        li.classList.add("bloqueada");
+        let msg = "";
+        if (estadoReq.faltan && estadoReq.faltan.length){
+          msg += "Falta aprobar: \n";
+          msg += estadoReq.faltan.map(etiquetaMat).join(", ");
+        }
+        if (estadoReq.faltanUC!==undefined) {
+          msg += `Faltan ${estadoReq.faltanUC} UC aprobadas`;
+        }
+        if (estadoReq.faltanMat && estadoReq.faltanMat.length) {
+          msg += "Debe aprobar todas las materias del 1° al 8° semestre";
+        }
+        li.dataset.tooltip = msg||"No cumple requisitos";
+      }
+      if (aprobadas.includes(mat.codigo)) {
+        li.classList.add("aprobada");
+      }
+      li.innerHTML = `
+        <span class="nombre">${mat.nombre}</span>
+        <span class="uc">${mat.uc} UC</span>
+        <span class="check">✔</span>
+      `;
+      if (!aprobadas.includes(mat.codigo) && !li.classList.contains('bloqueada')) {
+        li.addEventListener('click', function(e){
+          aprobadas.push(mat.codigo);
+          setAprobadas(aprobadas);
+          renderMalla();
+        });
+      }
+      if (aprobadas.includes(mat.codigo)) {
+        li.addEventListener('click', function(e){
+          const idx = aprobadas.indexOf(mat.codigo);
+          if(idx>-1) aprobadas.splice(idx,1);
+          setAprobadas(aprobadas);
+          renderMalla();
+        });
+      }
+      ul.appendChild(li);
+    });
+    semDiv.appendChild(ul);
+    mallaCont.appendChild(semDiv);
+  });
+}
+
+window.addEventListener('DOMContentLoaded', renderMalla);
+</script>
+</body>
+</html>
