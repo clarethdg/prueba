@@ -10,20 +10,15 @@
       font-family: 'Segoe UI', Arial, sans-serif;
       color: #253857;
       margin: 0;
-      padding-bottom: 42px;
+      padding-bottom: 60px;
     }
     .logos-ucv {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 10px 24px 0 24px;
-    }
-    .logo-facmed {
-      width: 77px;
-      border-radius: 100px;
-      box-shadow: 0 2px 6px #3332;
-      background: #ffe259;
-      padding: 3px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
     }
     .logo-ceebio {
       width: 116px;
@@ -31,11 +26,18 @@
       border-radius: 12px;
       box-shadow: 0 2px 6px #3332;
       padding: 2px 6px;
+      max-width: 90vw;
+      height: auto;
     }
-    @media (max-width:800px){
-      .logos-ucv {padding: 7px 6px 0 6px;}
-      .logo-facmed {width: 53px;}
-      .logo-ceebio {width: 77px;}
+    .copyright {
+      font-size: 0.88em;
+      color: #566074;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-align: center;
+      margin-top: 6px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
     }
     header {
       text-align: center;
@@ -52,7 +54,7 @@
       margin: 0 0 10px 0;
       text-shadow: 0 2px 7px #1f3964;
     }
-    /* --- Nueva disposición: 2 filas, 5 columnas --- */
+    /* --- Disposición: 2 filas, 5 columnas --- */
     .malla-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -230,10 +232,6 @@
   </style>
 </head>
 <body>
-  <div class="logos-ucv">
-    <img src="logo-facmed.png" alt="Logo Facultad de Medicina" class="logo-facmed">
-    <img src="logo-ceebio.jpg" alt="Logo CEEBIO" class="logo-ceebio">
-  </div>
   <header>
     <h1>Malla Curricular - Licenciatura en Bioanálisis<br>
       <span style="font-size:1.09em;">Universidad Central de Venezuela</span>
@@ -242,9 +240,13 @@
   <div class="malla-grid" id="malla-contenedor"></div>
   <div class="leyenda">
     <strong>Información adicional:</strong><br>
-    • Para cursar <b>Deontología y Legislación</b>, deben tenerse aprobados 45 créditos.<br>
+    • Para cursar <b>Deontología y Legislación</b>, deben tenerse aprobados 45 créditos obligatorios.<br>
     • Para cursar <b>Administración Sanitaria</b>, deben aprobarse 40 créditos obligatorios.<br>
     • Para cursar el <b class="ir">Internado Rotatorio</b>, deben aprobarse 18 unidades de crédito de materias electivas, y haberse realizado el servicio comunitario.
+  </div>
+  <div class="logos-ucv" aria-label="Logo CEEBIO y derechos de autor">
+    <img src="logo-ceebio.jpg" alt="Logo CEEBIO" class="logo-ceebio" />
+    <div class="copyright">© 2025 por Clareth Dagfeel Sec. Asuntos Académicos.</div>
   </div>
 <script>
 const malla = [
