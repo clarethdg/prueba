@@ -13,23 +13,18 @@
       padding-bottom: 60px;
     }
     header {
+      background: transparent;
+      padding: 0;
+      margin: 0;
       text-align: center;
-      background: linear-gradient(90deg, #153054 60%, #f4ba04 120%);
-      padding: 32px 12px 20px 12px;
-      margin-bottom: 8px;
-      border-bottom: 1px solid #d6e3f7;
+      box-shadow: none;
     }
     .titulo-img {
-      max-width: 480px;
-      width: 95vw;
+      width: 100%;
       height: auto;
       display: block;
-      margin: 0 auto;
-      border-radius: 10px;
-      box-shadow: 0 3px 25px #12274528, 0 1.5px 4px #f4ba0439;
-      background: #fffde0;
-      padding: 8px 0 8px 0;
-      object-fit: contain;
+      border-radius: 0;
+      box-shadow: none;
     }
     .malla-grid {
       display: grid;
@@ -257,8 +252,6 @@
 </head>
 <body>
   <header>
-    <!-- Cambia el src a la imagen que tiene el logo/título institucional 
-         Por ejemplo: titulo-bioanalisis.png, debe estar en la misma carpeta -->
     <img
       src="titulo-bioanalisis.png.jpg"
       alt="Título: Malla Curricular Licenciatura en Bioanálisis UCV"
@@ -278,151 +271,128 @@
   </div>
   <script>
     const malla = [
-      {
-        nombre: "PRIMER SEMESTRE",
-        materias: [
+      { nombre: "PRIMER SEMESTRE", materias: [
           { nombre: "Matemática I", uc: 3, codigo: "mat1" },
           { nombre: "Histología", uc: 5, codigo: "histologia" },
           { nombre: "Bioestadística I", uc: 4, codigo: "bioest1" },
           { nombre: "Metodología de la Investigación", uc: 1, codigo: "metod" },
-          { nombre: "Principios de Química", uc: 3, codigo: "quimica1" },
-        ],
+          { nombre: "Principios de Química", uc: 3, codigo: "quimica1" }
+        ] 
       },
-      {
-        nombre: "SEGUNDO SEMESTRE",
-        materias: [
-          { nombre: "Matemática II", uc: 4, codigo: "mat2", reqs: ["mat1"] },
-          { nombre: "Física I", uc: 4, codigo: "fisica1", reqs: ["mat1"] },
-          { nombre: "Química Orgánica I", uc: 4, codigo: "quimorg1", reqs: ["quimica1"] },
-          { nombre: "Anatomía y Embriología I", uc: 4, codigo: "anat1", reqs: ["histologia"] },
-        ],
+      { nombre: "SEGUNDO SEMESTRE", materias: [
+          { nombre: "Matemática II", uc: 4, codigo: "mat2", reqs:["mat1"] },
+          { nombre: "Física I", uc: 4, codigo: "fisica1", reqs:["mat1"] },
+          { nombre: "Química Orgánica I", uc: 4, codigo: "quimorg1", reqs:["quimica1"] },
+          { nombre: "Anatomía y Embriología I", uc: 4, codigo: "anat1", reqs:["histologia"] }
+        ]
       },
-      {
-        nombre: "TERCER SEMESTRE",
-        materias: [
-          { nombre: "Química Analítica", uc: 5, codigo: "quiman", reqs: ["quimica1"] },
-          { nombre: "Física II", uc: 4, codigo: "fisica2", reqs: ["mat2", "fisica1"] },
-          { nombre: "Epidemiología", uc: 3, codigo: "epidemio", reqs: ["bioest1"] },
-          { nombre: "Anatomía II", uc: 2, codigo: "anat2", reqs: ["anat1"] },
-        ],
+      { nombre: "TERCER SEMESTRE", materias: [
+          { nombre: "Química Analítica", uc: 5, codigo: "quiman", reqs:["quimica1"] },
+          { nombre: "Física II", uc: 4, codigo: "fisica2", reqs:["mat2","fisica1"] },
+          { nombre: "Epidemiología", uc: 3, codigo: "epidemio", reqs:["bioest1"] },
+          { nombre: "Anatomía II", uc: 2, codigo: "anat2", reqs:["anat1"] }
+        ]
       },
-      {
-        nombre: "CUARTO SEMESTRE",
-        materias: [
-          { nombre: "Fisiología", uc: 5, codigo: "fisio", reqs: ["anat1"] },
+      { nombre: "CUARTO SEMESTRE", materias: [
+          { nombre: "Fisiología", uc: 5, codigo: "fisio", reqs:["anat1"] },
           { nombre: "Sociología", uc: 3, codigo: "socio" },
-          { nombre: "Bioquímica I", uc: 6, codigo: "bioq1", reqs: ["histologia", "bioest1", "fisica2", "quimorg1", "quiman"] },
-        ],
+          { nombre: "Bioquímica I", uc: 6, codigo: "bioq1", reqs:["histologia","bioest1","fisica2","quimorg1","quiman"] }
+        ]
       },
-      {
-        nombre: "QUINTO SEMESTRE",
-        materias: [
+      { nombre: "QUINTO SEMESTRE", materias: [
           { nombre: "Deontología y Legislación", uc: 3, codigo: "deont", reqUC: 45 },
           { nombre: "Administración Sanitaria", uc: 2, codigo: "adminsan", reqUC: 40 },
-          { nombre: "Bioquímica II", uc: 2, codigo: "bioq2", reqs: ["bioq1"] },
-          { nombre: "Inmunología I", uc: 2, codigo: "inmun1", reqs: ["bioq1"] },
-          { nombre: "Bacteriología I", uc: 3, codigo: "bact1", reqs: ["bioq1"] },
-        ],
+          { nombre: "Bioquímica II", uc: 2, codigo: "bioq2", reqs:["bioq1"] },
+          { nombre: "Inmunología I", uc: 2, codigo: "inmun1", reqs:["bioq1"] },
+          { nombre: "Bacteriología I", uc: 3, codigo: "bact1", reqs:["bioq1"] }
+        ]
       },
-      {
-        nombre: "SEXTO SEMESTRE",
-        materias: [
-          { nombre: "Micología", uc: 3, codigo: "mico", reqs: ["bact1", "epidemio", "inmun1"] },
-          { nombre: "Laboratorio de Inmunología", uc: 2, codigo: "labinmun", reqs: ["bact1", "inmun1"] },
-          { nombre: "Bacteriología II", uc: 4, codigo: "bact2", reqs: ["bact1", "inmun1"] },
-          { nombre: "Bioquímica Clínica I", uc: 5, codigo: "bioqclin1", reqs: ["fisio", "bioq2"] },
-        ],
+      { nombre: "SEXTO SEMESTRE", materias: [
+          { nombre: "Micología", uc: 3, codigo: "mico", reqs:["bact1","epidemio","inmun1"] },
+          { nombre: "Laboratorio de Inmunología", uc: 2, codigo: "labinmun", reqs:["bact1","inmun1"] },
+          { nombre: "Bacteriología II", uc: 4, codigo: "bact2", reqs:["bact1","inmun1"] },
+          { nombre: "Bioquímica Clínica I", uc: 5, codigo: "bioqclin1", reqs:["fisio","bioq2"] }
+        ]
       },
-      {
-        nombre: "SÉPTIMO SEMESTRE",
-        materias: [
-          { nombre: "Hematología I", uc: 5, codigo: "hem1", reqs: ["fisio", "bioq2", "labinmun"] },
-          { nombre: "Virología", uc: 3, codigo: "viro", reqs: ["fisio", "labinmun"] },
-          { nombre: "Parasitología I", uc: 3, codigo: "paras1", reqs: ["labinmun"] },
-          { nombre: "Bacteriología III", uc: 3, codigo: "bact3", reqs: ["bact2"] },
-        ],
+      { nombre: "SÉPTIMO SEMESTRE", materias: [
+          { nombre: "Hematología I", uc: 5, codigo: "hem1", reqs:["fisio","bioq2","labinmun"] },
+          { nombre: "Virología", uc: 3, codigo: "viro", reqs:["fisio","labinmun"] },
+          { nombre: "Parasitología I", uc: 3, codigo: "paras1", reqs:["labinmun"] },
+          { nombre: "Bacteriología III", uc: 3, codigo: "bact3", reqs:["bact2"] }
+        ]
       },
-      {
-        nombre: "OCTAVO SEMESTRE",
-        materias: [
-          { nombre: "Toxicología", uc: 5, codigo: "tox", reqs: ["bioqclin1", "hem1"] },
-          { nombre: "Bioquímica Clínica II", uc: 5, codigo: "bioqclin2", reqs: ["bioqclin1", "hem1"] },
-          { nombre: "Hematología II", uc: 5, codigo: "hem2", reqs: ["hem1"] },
-          { nombre: "Parasitología II", uc: 3, codigo: "paras2", reqs: ["labinmun"] },
-        ],
+      { nombre: "OCTAVO SEMESTRE", materias: [
+          { nombre: "Toxicología", uc: 5, codigo: "tox", reqs:["bioqclin1","hem1"] },
+          { nombre: "Bioquímica Clínica II", uc:5, codigo: "bioqclin2", reqs:["bioqclin1","hem1"] },
+          { nombre: "Hematología II", uc: 5, codigo: "hem2", reqs:["hem1"] },
+          { nombre: "Parasitología II", uc:3, codigo: "paras2", reqs:["labinmun"] }
+        ]
       },
-      {
-        nombre: "NOVENO SEMESTRE",
-        materias: [
+      { nombre: "NOVENO SEMESTRE", materias: [
           { nombre: "Internado Rotatorio A", uc: 15, codigo: "inta", reqAllPrev: true },
-          { nombre: "Trabajo Especial de Investigación (TEI)", uc: 0, codigo: "teia", reqAllPrev: true },
-        ],
+          { nombre: "Trabajo Especial de Investigación (TEI)", uc: 0, codigo: "teia", reqAllPrev: true }
+        ]
       },
-      {
-        nombre: "DÉCIMO SEMESTRE",
-        materias: [
+      { nombre: "DÉCIMO SEMESTRE", materias: [
           { nombre: "Internado Rotatorio B", uc: 15, codigo: "intb", reqAllPrev: true },
-          { nombre: "Trabajo Especial de Investigación (TEI)", uc: 0, codigo: "teib", reqAllPrev: true },
-        ],
-      },
+          { nombre: "Trabajo Especial de Investigación (TEI)", uc: 0, codigo: "teib", reqAllPrev: true }
+        ]
+      }
     ];
 
     const creditoMap = {};
-    malla.forEach((sem) =>
-      sem.materias.forEach((mat) => {
-        creditoMap[mat.codigo] = mat.uc;
-      })
-    );
+    malla.forEach(sem=>sem.materias.forEach(mat=>{ creditoMap[mat.codigo]=mat.uc }));
 
     function getAprobadas() {
-      let guardado = localStorage.getItem("bioanalisis_ucv_aprobadas_v1");
+      let guardado = localStorage.getItem('bioanalisis_ucv_aprobadas_v1');
       return guardado ? JSON.parse(guardado) : [];
     }
     function setAprobadas(arr) {
-      localStorage.setItem("bioanalisis_ucv_aprobadas_v1", JSON.stringify(arr));
+      localStorage.setItem('bioanalisis_ucv_aprobadas_v1', JSON.stringify(arr));
     }
     function totalUC(aprobadas) {
-      return aprobadas.reduce((s, cod) => s + (creditoMap[cod] || 0), 0);
+      return aprobadas.reduce((s,cod)=>s+(creditoMap[cod]||0),0);
     }
     function checkReqs(mat, aprobadas) {
-      if (mat.reqs && mat.reqs.some((req) => !aprobadas.includes(req)))
+      if (mat.reqs && mat.reqs.some(req=>!aprobadas.includes(req))) 
         return {
-          ok: false,
-          faltan: mat.reqs.filter((req) => !aprobadas.includes(req)),
+          ok:false, 
+          faltan: mat.reqs.filter(req=>!aprobadas.includes(req)) 
         };
-      if (mat.reqUC && totalUC(aprobadas) < mat.reqUC)
+      if (mat.reqUC && totalUC(aprobadas)<mat.reqUC)
         return {
-          ok: false,
-          faltanUC: mat.reqUC - totalUC(aprobadas),
+          ok:false,
+          faltanUC: mat.reqUC - totalUC(aprobadas)
         };
       if (mat.reqAllPrev) {
         let prevMat = [];
-        for (let i = 0; i < 8; i++) malla[i].materias.forEach((m) => prevMat.push(m.codigo));
-        if (!prevMat.every((c) => aprobadas.includes(c)))
-          return { ok: false, faltanMat: prevMat.filter((c) => !aprobadas.includes(c)) };
+        for(let i=0;i<8;i++) malla[i].materias.forEach(m=>prevMat.push(m.codigo));
+        if (!prevMat.every(c=>aprobadas.includes(c)))
+          return { ok:false, faltanMat: prevMat.filter(c=>!aprobadas.includes(c)) }
       }
-      return { ok: true };
+      return { ok:true };
     }
 
     function etiquetaMat(codigo) {
-      for (let sem of malla)
-        for (let mat of sem.materias)
-          if (mat.codigo === codigo) return mat.nombre;
+      for(let sem of malla)
+        for(let mat of sem.materias)
+          if (mat.codigo===codigo) 
+            return mat.nombre;
       return codigo;
     }
 
     function renderMalla() {
       const aprobadas = getAprobadas();
-      const contenedor = document.getElementById("malla-contenedor");
+      const contenedor = document.getElementById('malla-contenedor');
       contenedor.innerHTML = "";
 
       // Primera fila: semestres 1-5
-      for (let i = 0; i < 5; i++) {
+      for (let i=0;i<5;i++) {
         const semDiv = crearSemestreDiv(malla[i], aprobadas);
         contenedor.appendChild(semDiv);
       }
       // Segunda fila: semestres 6-10
-      for (let i = 5; i < 10; i++) {
+      for (let i=5;i<10;i++) {
         const semDiv = crearSemestreDiv(malla[i], aprobadas);
         contenedor.appendChild(semDiv);
       }
