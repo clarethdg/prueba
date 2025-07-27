@@ -205,7 +205,7 @@
     .copyright {
       font-size: 0.88em;
       color: #566074;
-      font-weight: 400;
+      font-weight: 700; /* Negrita */
       letter-spacing: 0.02em;
       text-align: center;
       margin-top: 6px;
@@ -253,7 +253,7 @@
 <body>
   <header>
     <img
-      src="titulo-bioanalisis.png.jpg"
+      src="titulo-bioanalisis.png"
       alt="Título: Malla Curricular Licenciatura en Bioanálisis UCV"
       class="titulo-img"
     />
@@ -266,7 +266,7 @@
     • Para cursar el <b class="ir">Internado Rotatorio</b>, deben aprobarse 18 unidades de crédito de materias electivas, y haberse realizado el servicio comunitario.
   </div>
   <div class="logos-ucv" aria-label="Logo CEEBIO y derechos de autor">
-    <img src="logo del CEEBIO.PNG" alt="Logo CEEBIO" class="logo-ceebio" />
+    <img src="Logo del CEEBIO.PNG" alt="Logo CEEBIO" class="logo-ceebio" />
     <div class="copyright">© 2025 por Clareth Dagfeel Sec. Asuntos Académicos.</div>
   </div>
   <script>
@@ -303,29 +303,29 @@
           { nombre: "Deontología y Legislación", uc: 3, codigo: "deont", reqUC: 45 },
           { nombre: "Administración Sanitaria", uc: 2, codigo: "adminsan", reqUC: 40 },
           { nombre: "Bioquímica II", uc: 2, codigo: "bioq2", reqs:["bioq1"] },
-          { nombre: "Inmunología I", uc: 2, codigo: "inmun1", reqs:["bioq1"] },
-          { nombre: "Bacteriología I", uc: 3, codigo: "bact1", reqs:["bioq1"] }
+          { nombre: "Inmunología I", uc: 2, codigo: "inmun1", reqs: ["bioq1"] },
+          { nombre: "Bacteriología I", uc: 3, codigo: "bact1", reqs: ["bioq1"] }
         ]
       },
       { nombre: "SEXTO SEMESTRE", materias: [
-          { nombre: "Micología", uc: 3, codigo: "mico", reqs:["bact1","epidemio","inmun1"] },
-          { nombre: "Laboratorio de Inmunología", uc: 2, codigo: "labinmun", reqs:["bact1","inmun1"] },
-          { nombre: "Bacteriología II", uc: 4, codigo: "bact2", reqs:["bact1","inmun1"] },
-          { nombre: "Bioquímica Clínica I", uc: 5, codigo: "bioqclin1", reqs:["fisio","bioq2"] }
+          { nombre: "Micología", uc: 3, codigo: "mico", reqs: ["bact1","epidemio","inmun1"] },
+          { nombre: "Laboratorio de Inmunología", uc: 2, codigo: "labinmun", reqs: ["bact1","inmun1"] },
+          { nombre: "Bacteriología II", uc: 4, codigo: "bact2", reqs: ["bact1","inmun1"] },
+          { nombre: "Bioquímica Clínica I", uc: 5, codigo: "bioqclin1", reqs: ["fisio","bioq2"] }
         ]
       },
       { nombre: "SÉPTIMO SEMESTRE", materias: [
-          { nombre: "Hematología I", uc: 5, codigo: "hem1", reqs:["fisio","bioq2","labinmun"] },
-          { nombre: "Virología", uc: 3, codigo: "viro", reqs:["fisio","labinmun"] },
-          { nombre: "Parasitología I", uc: 3, codigo: "paras1", reqs:["labinmun"] },
-          { nombre: "Bacteriología III", uc: 3, codigo: "bact3", reqs:["bact2"] }
+          { nombre: "Hematología I", uc: 5, codigo: "hem1", reqs: ["fisio","bioq2","labinmun"] },
+          { nombre: "Virología", uc: 3, codigo: "viro", reqs: ["fisio","labinmun"] },
+          { nombre: "Parasitología I", uc: 3, codigo: "paras1", reqs: ["labinmun"] },
+          { nombre: "Bacteriología III", uc: 3, codigo: "bact3", reqs: ["bact2"] }
         ]
       },
       { nombre: "OCTAVO SEMESTRE", materias: [
-          { nombre: "Toxicología", uc: 5, codigo: "tox", reqs:["bioqclin1","hem1"] },
-          { nombre: "Bioquímica Clínica II", uc:5, codigo: "bioqclin2", reqs:["bioqclin1","hem1"] },
-          { nombre: "Hematología II", uc: 5, codigo: "hem2", reqs:["hem1"] },
-          { nombre: "Parasitología II", uc:3, codigo: "paras2", reqs:["labinmun"] }
+          { nombre: "Toxicología", uc: 5, codigo: "tox", reqs: ["bioqclin1","hem1"] },
+          { nombre: "Bioquímica Clínica II", uc:5, codigo: "bioqclin2", reqs: ["bioqclin1","hem1"] },
+          { nombre: "Hematología II", uc: 5, codigo: "hem2", reqs: ["hem1"] },
+          { nombre: "Parasitología II", uc:3, codigo: "paras2", reqs: ["labinmun"] }
         ]
       },
       { nombre: "NOVENO SEMESTRE", materias: [
